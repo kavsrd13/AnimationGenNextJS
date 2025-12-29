@@ -18,14 +18,56 @@ export default function PromptInput({ onGenerate, isLoading }: PromptInputProps)
   }
 
   const examplePrompts = [
+    // Mathematics
     "Visualize the Pythagorean theorem with a right triangle",
+    "Demonstrate the concept of derivatives with a tangent line",
     "Show how a circle transforms into a square",
-    "Demonstrate the concept of derivatives",
+    
+    // Physics
+    "Create a simple pendulum swinging back and forth",
+    "Animate wave interference patterns with two sources",
+    "Show a ball bouncing with gravity and velocity vectors",
+    
+    // Machine Learning
+    "Visualize gradient descent optimization on a 3D surface",
+    "Animate a neural network with nodes and connections",
+    "Show how data points get classified with decision boundaries",
+    
+    // Computer Science
     "Animate a sorting algorithm with colored bars",
+    "Visualize a binary search tree insertion process",
+    "Show how a graph traversal algorithm explores nodes",
   ]
 
   return (
     <div className="space-y-4">
+      {/* App Description */}
+      <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg p-4 border-2 border-purple-200 mb-6">
+        <h3 className="font-semibold text-purple-800 mb-2">Example animations you can create:</h3>
+        <ul className="text-sm text-gray-700 space-y-1">
+          <li className="flex items-start gap-2">
+            <span className="text-purple-600 mt-1">•</span>
+            <span>Mathematical visualizations (Pythagorean theorem, derivatives)</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-purple-600 mt-1">•</span>
+            <span>Geometric transformations and morphing</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-purple-600 mt-1">•</span>
+            <span>Physics simulations (pendulum, waves)</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-purple-600 mt-1">•</span>
+            <span>Data visualizations and charts</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-purple-600 mt-1">•</span>
+            <span>Educational concept explanations</span>
+          </li>
+        </ul>
+      </div>
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="prompt" className="block text-sm font-medium text-gray-700 mb-2">
@@ -60,8 +102,8 @@ export default function PromptInput({ onGenerate, isLoading }: PromptInputProps)
       </form>
 
       <div className="mt-6">
-        <p className="text-sm font-medium text-gray-700 mb-3">Try an example:</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+        <p className="text-sm font-medium text-gray-700 mb-3">Try an example prompt:</p>
+        <div className="grid grid-cols-1 gap-2">
           {examplePrompts.map((example, index) => (
             <button
               key={index}
