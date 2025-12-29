@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #667eea;
+  --secondary: #764ba2;
+}
+
+body {
+  @apply bg-gradient-to-br from-[#667eea] to-[#764ba2] min-h-screen;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-white text-purple-600 font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100;
+  }
+  
+  .card {
+    @apply bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-8;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-3 border-2 border-purple-200 rounded-lg focus:outline-none focus:border-purple-500 transition-colors;
+  }
+  
+  .step-badge {
+    @apply inline-flex items-center justify-center w-8 h-8 rounded-full bg-purple-500 text-white font-bold text-sm;
+  }
+  
+  .step-badge.active {
+    @apply bg-gradient-to-r from-[#667eea] to-[#764ba2] animate-pulse;
+  }
+  
+  .step-badge.completed {
+    @apply bg-green-500;
+  }
+
+  /* Range Slider Styling */
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  input[type="range"]::-webkit-slider-track {
+    background-color: #e9d5ff;
+    border-radius: 0.5rem;
+    height: 0.5rem;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: -4px;
+    background-color: #9333ea;
+    border-radius: 0.5rem;
+    height: 1rem;
+    width: 1rem;
+    transition: all 0.2s ease;
+  }
+
+  input[type="range"]::-webkit-slider-thumb:hover {
+    background-color: #7e22ce;
+    transform: scale(1.2);
+  }
+
+  input[type="range"]::-moz-range-track {
+    background-color: #e9d5ff;
+    border-radius: 0.5rem;
+    height: 0.5rem;
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    background-color: #9333ea;
+    border: none;
+    border-radius: 0.5rem;
+    height: 1rem;
+    width: 1rem;
+    transition: all 0.2s ease;
+  }
+
+  input[type="range"]::-moz-range-thumb:hover {
+    background-color: #7e22ce;
+    transform: scale(1.2);
+  }
+}
