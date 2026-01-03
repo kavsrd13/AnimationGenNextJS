@@ -134,10 +134,10 @@ Settings to apply:
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-5xl font-bold text-white mb-4">
-            Python Animation Generator
+            Educational Animation Generator
           </h1>
           <p className="text-white/90 text-lg">
-            Create stunning mathematical animations using AI and Python
+            Create professional educational animations for teaching concepts to students using AI and Manim
           </p>
         </div>
 

@@ -5,8 +5,8 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Python Animation Generator',
-  description: 'Create beautiful mathematical animations using AI and Python',
+  title: 'Educational Animation Generator - AI-Powered Manim',
+  description: 'Create professional educational animations for teaching concepts to students with LaTeX support using AI and Manim',
 }
 
 export default function RootLayout({

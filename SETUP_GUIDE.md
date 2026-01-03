@@ -146,9 +146,10 @@ Video displayed in browser
 
 ## 💡 Tips for Best Results
 
-- Keep prompts simple and specific
-- Avoid requesting complex mathematical notation (LaTeX)
-- Use basic shapes and animations
+- Keep prompts clear and educational
+- Use mathematical notation freely - LaTeX is fully supported with MathTex() and Tex()
+- Focus on teaching concepts to students step-by-step
+- Use visual aids like arrows, colors, and annotations to enhance learning
 - Be patient - rendering can take 10-60 seconds
 - Try the example prompts to see what works well
 

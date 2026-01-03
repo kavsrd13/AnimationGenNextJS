@@ -73,10 +73,12 @@ npm run dev
 
 ## Example Prompts
 
-- "Visualize the Pythagorean theorem with a right triangle"
-- "Show how a circle transforms into a square"
-- "Demonstrate the concept of derivatives"
-- "Animate a sorting algorithm with colored bars"
+- "Teach the Pythagorean theorem a² + b² = c² with a visual proof"
+- "Explain quadratic formula with step-by-step derivation"
+- "Demonstrate gradient descent optimization algorithm"
+- "Show how derivatives work with a tangent line animation"
+- "Visualize the unit circle and trigonometric functions"
+- "Animate matrix multiplication step by step"
 
 ## Deployment
 

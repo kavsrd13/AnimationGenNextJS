@@ -19,51 +19,51 @@ export default function PromptInput({ onGenerate, isLoading }: PromptInputProps)
 
   const examplePrompts = [
     // Mathematics
-    "Visualize the Pythagorean theorem with a right triangle",
-    "Demonstrate the concept of derivatives with a tangent line",
-    "Show how a circle transforms into a square",
+    "Teach the Pythagorean theorem a² + b² = c² with visual proof",
+    "Explain derivatives using tangent lines and limits",
+    "Show the quadratic formula derivation step by step",
     
     // Physics
-    "Create a simple pendulum swinging back and forth",
-    "Animate wave interference patterns with two sources",
-    "Show a ball bouncing with gravity and velocity vectors",
+    "Demonstrate Newton's second law F=ma with examples",
+    "Visualize wave interference with mathematical equations",
+    "Explain kinetic and potential energy in a pendulum",
     
-    // Machine Learning
-    "Visualize gradient descent optimization on a 3D surface",
-    "Animate a neural network with nodes and connections",
-    "Show how data points get classified with decision boundaries",
+    // Calculus
+    "Teach integration as area under a curve",
+    "Show the fundamental theorem of calculus visually",
+    "Demonstrate the chain rule with nested functions",
     
-    // Computer Science
-    "Animate a sorting algorithm with colored bars",
-    "Visualize a binary search tree insertion process",
-    "Show how a graph traversal algorithm explores nodes",
+    // Algebra
+    "Explain matrix multiplication step by step",
+    "Visualize eigenvalues and eigenvectors",
+    "Teach solving systems of equations with elimination method",
   ]
 
   return (
     <div className="space-y-4">
       {/* App Description */}
       <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg p-4 border-2 border-purple-200 mb-6">
-        <h3 className="font-semibold text-purple-800 mb-2">Example animations you can create:</h3>
+        <h3 className="font-semibold text-purple-800 mb-2">Create Educational Animations with LaTeX Support:</h3>
         <ul className="text-sm text-gray-700 space-y-1">
           <li className="flex items-start gap-2">
             <span className="text-purple-600 mt-1">•</span>
-            <span>Mathematical visualizations (Pythagorean theorem, derivatives)</span>
+            <span>Mathematical concepts with professional LaTeX equations</span>
           </li>
           <li className="flex items-start gap-2">
             <span className="text-purple-600 mt-1">•</span>
-            <span>Geometric transformations and morphing</span>
+            <span>Step-by-step teaching animations for students</span>
           </li>
           <li className="flex items-start gap-2">
             <span className="text-purple-600 mt-1">•</span>
-            <span>Physics simulations (pendulum, waves)</span>
+            <span>Physics and calculus visualizations with formulas</span>
           </li>
           <li className="flex items-start gap-2">
             <span className="text-purple-600 mt-1">•</span>
-            <span>Data visualizations and charts</span>
+            <span>Algebraic proofs and derivations</span>
           </li>
           <li className="flex items-start gap-2">
             <span className="text-purple-600 mt-1">•</span>
-            <span>Educational concept explanations</span>
+            <span>Scientific concept explanations with annotations</span>
           </li>
         </ul>
       </div>
@@ -77,7 +77,7 @@ export default function PromptInput({ onGenerate, isLoading }: PromptInputProps)
             id="prompt"
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            placeholder="E.g., Create an animation showing a blue circle that grows and changes color..."
+            placeholder="E.g., Teach the quadratic formula with a step-by-step derivation using LaTeX equations..."
             className="input-field min-h-[120px] resize-y"
             disabled={isLoading}
           />

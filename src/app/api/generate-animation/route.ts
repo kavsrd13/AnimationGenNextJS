@@ -24,62 +24,82 @@ export async function POST(request: NextRequest) {
     }
 
     // Step 1: Generate Manim code using Azure OpenAI
-    const codeSystemPrompt = `You are a Manim code generator. Generate clean, working Python code.
+    const codeSystemPrompt = `You are an expert Manim code generator specializing in creating educational animations for teaching concepts to students.
 
-⚠️ CRITICAL: LaTeX is NOT installed. You MUST NOT use MathTex() or Tex() at all.
+✅ LaTeX is FULLY INSTALLED and available. You SHOULD use MathTex() and Tex() for mathematical expressions.
 
 MANDATORY RULES:
-1. Output ONLY executable Python code (no markdown, no \`\`\`python blocks, no explanations)
+1. Output ONLY executable Python code (no markdown, no ```python blocks, no explanations)
 2. Always start with: from manim import *
 3. Class must be named: GeneratedScene(Scene)
 4. Use construct(self) method
-5. Keep it SIMPLE - prefer basic shapes and text
+5. Focus on EDUCATIONAL clarity - animations should help students understand concepts
 
-FOR TEXT (REQUIRED FOR ALL TEXT/MATH):
-- Use Text("message", font_size=36, color=WHITE) for ALL text
-- Use Unicode symbols for math: ×, ÷, ², ³, √, π, ∑, ∫, ≈, ≤, ≥, ∞
-- Examples: Text("E=mc²"), Text("a² + b² = c²"), Text("∫ f(x)dx")
-- NEVER use MathTex() or Tex() - they will fail without LaTeX
+FOR TEXT AND MATHEMATICS:
+- Use MathTex() for mathematical expressions and equations: MathTex(r"E = mc^2", font_size=48)
+- Use Tex() for LaTeX formatted text: Tex(r"Pythagorean Theorem", font_size=40)
+- Use Text() for simple labels and non-mathematical text: Text("Step 1", font_size=36)
+- Always use raw strings (r"...") with LaTeX commands
+- Common LaTeX: \\frac{a}{b}, \\sqrt{x}, \\sum, \\int, \\alpha, \\theta, \\pi, \\infty
+- For matrices: MathTex(r"\\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}")
 
-FOR SHAPES:
+FOR SHAPES AND VISUAL ELEMENTS:
 - Circle(), Square(), Rectangle(), Line(), Arrow(), Dot(), Polygon()
+- NumberPlane() for coordinate systems, Axes() for graphs
 - Set color: Circle(color=BLUE, radius=1)
 - Set position: .shift(UP), .move_to(ORIGIN), .next_to(other, RIGHT)
+- Use VGroup() to group related objects together
 
-FOR ANIMATIONS:
-- self.play(Write(text)) - for text appearing
+FOR EDUCATIONAL ANIMATIONS:
+- self.play(Write(equation)) - for equations appearing (great for teaching)
 - self.play(Create(shape)) - for shapes appearing
-- self.play(FadeIn(object)) - fade in
-- self.play(FadeOut(object)) - fade out
-- self.play(object.animate.shift(UP)) - move object
-- self.play(Transform(obj1, obj2)) - morph objects
-- self.wait(1) - pause for 1 second
+- self.play(FadeIn(object)) - fade in elements
+- self.play(FadeOut(object)) - fade out elements
+- self.play(Transform(obj1, obj2)) - show transformations (excellent for teaching)
+- self.play(Indicate(object)) - highlight important elements
+- self.play(object.animate.shift(UP)) - move objects
+- self.wait(1) - pause for student comprehension
 
-BEST PRACTICES:
-- Define ALL objects before using them in animations
-- Use clear variable names
-- Keep total animation under 15 seconds
-- Break complex ideas into 3-5 simple steps
-- Test each object is created before animating it
+EDUCATIONAL BEST PRACTICES:
+- Start with the main concept or title
+- Build understanding step-by-step (don't show everything at once)
+- Use colors to distinguish different elements (RED for important, BLUE for formulas, GREEN for solutions)
+- Add pauses (self.wait()) after each key concept
+- Use arrows and annotations to guide student attention
+- Keep animations clear and at a pace students can follow
+- Total duration: 10-20 seconds for simple concepts, up to 30 seconds for complex topics
 
-GOOD EXAMPLE:
+GOOD EDUCATIONAL EXAMPLE:
 from manim import *
 
 class GeneratedScene(Scene):
     def construct(self):
-        # Using Unicode for math
-        title = Text("E=mc²", font_size=48, color=YELLOW)
-        formula = Text("Energy = Mass × Speed²", font_size=36)
-        formula.next_to(title, DOWN)
-
+        # Teaching Einstein's equation
+        title = Tex(r"Einstein's Energy-Mass Equivalence", font_size=40, color=YELLOW)
+        title.to_edge(UP)
+        
+        equation = MathTex(r"E = mc^2", font_size=60, color=BLUE)
+        
+        explanation = VGroup(
+            MathTex(r"E", r"=", r"\\text{Energy}", font_size=36, color=RED),
+            MathTex(r"m", r"=", r"\\text{Mass}", font_size=36, color=GREEN),
+            MathTex(r"c", r"=", r"\\text{Speed of Light}", font_size=36, color=ORANGE)
+        ).arrange(DOWN, buff=0.4)
+        explanation.next_to(equation, DOWN, buff=1)
+        
         self.play(Write(title))
         self.wait(0.5)
-        self.play(FadeIn(formula))
+        self.play(Write(equation))
         self.wait(1)
+        self.play(FadeIn(explanation, shift=UP))
+        self.wait(2)
 
-BAD EXAMPLE (DON'T DO THIS):
-- equation = MathTex(r"E=mc^2")  # ❌ FORBIDDEN - LaTeX not installed
-- tex = Tex("Hello")  # ❌ FORBIDDEN - LaTeX not installed`
+BEST PRACTICES FOR STUDENT LEARNING:
+- Use MathTex() and Tex() for professional mathematical notation
+- Break complex formulas into parts students can digest
+- Use colors to create visual connections
+- Include brief pauses for comprehension
+- Build from simple to complex gradually`
 
     const codeResponse = await fetch(
       `${endpoint}/openai/deployments/${deploymentName}/chat/completions?api-version=2024-12-01-preview`,

@@ -22,29 +22,30 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const enhanceSystemPrompt = `You are an expert prompt engineer for python animations.
+    const enhanceSystemPrompt = `You are an expert educational content designer for Manim animations.
 
-Your job: Convert the user's casual description into a DETAILED, SPECIFIC prompt for python code generation.
+Your job: Convert the user's casual description into a DETAILED, PEDAGOGICALLY EFFECTIVE prompt for generating educational animations that help students learn concepts.
 
-IMPORTANT: LaTeX is NOT available. All math must use plain text with Unicode symbols.
+IMPORTANT: LaTeX is FULLY AVAILABLE. Use professional mathematical notation with MathTex() and Tex().
 
-Guidelines:
-1. Break down complex ideas into 3-5 simple, sequential steps
-2. Specify colors, sizes, and positions where helpful
-3. Keep animations SHORT (5-15 seconds total)
-4. Use simple shapes and text rather than complex graphics
-5. For math/equations, ALWAYS use Unicode symbols: ×, ÷, ², ³, √, π, ∑, ∫, ≈, ≤, ≥, ∞, α, β, γ, Δ, etc.
-6. NEVER suggest LaTeX, MathTex, or Tex - use Text() only
-7. Describe visual elements clearly (circles, squares, arrows, text)
-8. Avoid overly complex movements or transformations
-9. Be concrete and specific about what should appear on screen
+Guidelines for Educational Animations:
+1. Break down complex concepts into clear, sequential steps that build understanding
+2. Specify use of MathTex() for equations and mathematical expressions
+3. Keep animations focused (10-30 seconds) - long enough to teach, short enough to maintain attention
+4. Use visual hierarchies: titles, main concepts, supporting details
+5. For math/equations, specify LaTeX notation: E=mc^2, \\frac{a}{b}, \\sqrt{x}, \\int, \\sum, etc.
+6. ALWAYS use MathTex() and Tex() for professional mathematical notation
+7. Specify colors that enhance learning: highlight key formulas, use contrasts for different concepts
+8. Include strategic pauses for student comprehension
+9. Suggest visual aids: arrows showing relationships, boxes highlighting key points, step-by-step reveals
 
-Example:
+Example Teaching Prompts:
+
 User: "gradient descent finding minimum"
-Enhanced: "Create a simple parabola curve in blue. Show a red dot starting at a high point on the curve. Animate the dot moving down the curve in small steps, following the slope downward. Add a text label 'Gradient Descent' at the top. The dot should stop at the bottom (minimum) of the curve. Total duration: 8 seconds."
+Enhanced: "Create an educational animation showing gradient descent optimization. Start with a title using Tex() 'Gradient Descent Algorithm'. Display a blue parabola using a parametric curve representing f(x) = x². Show the mathematical formula using MathTex(r'f(x) = x^2') in the top corner. Animate a red dot starting at a high point on the curve with initial position label using MathTex(r'x_0'). Show the dot taking discrete steps down the curve, with each step showing a small tangent line indicating the gradient direction. Display the update rule using MathTex(r'x_{n+1} = x_n - \\alpha \\nabla f(x_n)') appearing when the dot moves. The dot should converge to the minimum at the bottom. Duration: 18 seconds with pauses at key steps."
 
 User: "explain E=mc²"
-Enhanced: "Show the text 'E=mc²' in large font at center using Unicode superscript. Then split it into three parts: 'E' (energy) in yellow on left, '=' in white at center, 'mc²' (mass × speed²) in blue on right. Use arrows to show how mass times speed of light squared equals energy. Duration: 10 seconds."
+Enhanced: "Create a teaching animation for Einstein's famous equation. Start with a title using Tex(r'Einstein\\'s Energy-Mass Equivalence') at the top. Display the complete equation using MathTex(r'E = mc^2', font_size=60) in the center. Then break it down step-by-step: first highlight 'E' and show MathTex(r'E = \\text{Energy (Joules)}') appear below it. Then highlight 'm' and show MathTex(r'm = \\text{Mass (kg)}'). Finally highlight 'c²' and show MathTex(r'c = 3 \\times 10^8 \\text{ m/s}') with a note explaining c is the speed of light. Use arrows to connect each variable to its meaning. Use distinct colors: blue for the main equation, red for energy, green for mass, orange for the speed of light. Duration: 20 seconds."
 
 Return ONLY the enhanced prompt, nothing else.`
 
