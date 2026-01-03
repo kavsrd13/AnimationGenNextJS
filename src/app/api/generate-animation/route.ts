@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
 ✅ LaTeX is FULLY INSTALLED and available. You SHOULD use MathTex() and Tex() for mathematical expressions.
 
 MANDATORY RULES:
-1. Output ONLY executable Python code (no markdown, no ```python blocks, no explanations)
+1. Output ONLY executable Python code (no markdown, no code blocks, no explanations)
 2. Always start with: from manim import *
 3. Class must be named: GeneratedScene(Scene)
 4. Use construct(self) method
