@@ -17,8 +17,17 @@ export async function POST(request: NextRequest) {
     const animationServerUrl = process.env.ANIMATION_SERVER_URL
 
     if (!apiKey || !endpoint || !deploymentName || !animationServerUrl) {
+      const missing = []
+      if (!apiKey) missing.push('AZURE_OPENAI_API_KEY')
+      if (!endpoint) missing.push('AZURE_OPENAI_ENDPOINT')
+      if (!deploymentName) missing.push('AZURE_OPENAI_DEPLOYMENT_NAME')
+      if (!animationServerUrl) missing.push('ANIMATION_SERVER_URL')
+      
       return NextResponse.json(
-        { error: 'Configuration missing' },
+        { 
+          error: 'Environment configuration missing', 
+          details: `Missing: ${missing.join(', ')}. Please check your .env.local file.` 
+        },
         { status: 500 }
       )
     }
@@ -205,8 +214,24 @@ BEST PRACTICES FOR STUDENT LEARNING:
     })
   } catch (error: any) {
     console.error('Error in generate-animation API:', error)
+    
+    // Provide more specific error messages
+    let errorMessage = 'Internal server error'
+    let errorDetails = error.message
+    
+    if (error.message?.includes('fetch')) {
+      errorMessage = 'Network error'
+      errorDetails = 'Failed to connect to Azure OpenAI or Animation Server. Check your network connection and server URLs.'
+    } else if (error.message?.includes('JSON')) {
+      errorMessage = 'Invalid response format'
+      errorDetails = 'Received invalid data from server. This may be a temporary issue.'
+    } else if (error.message?.includes('timeout')) {
+      errorMessage = 'Request timeout'
+      errorDetails = 'The server took too long to respond. Try again or simplify your animation.'
+    }
+    
     return NextResponse.json(
-      { error: 'Internal server error', details: error.message },
+      { error: errorMessage, details: errorDetails },
       { status: 500 }
     )
   }

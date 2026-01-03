@@ -157,10 +157,11 @@ Generates code and renders animation.
 
 ## Troubleshooting
 
-- **Animation fails**: Try simplifying your prompt
-- **Long render times**: Complex animations take longer (30s-2min)
-- **API errors**: Verify Azure OpenAI credentials
-- **Server errors**: Check animation server is running
+- **Internal server error**: Check Azure OpenAI API key, endpoint, and deployment name in environment variables
+- **Animation server errors**: Verify ANIMATION_SERVER_URL is correct and the Manim server is running
+- **Long render times**: Educational animations typically take 15-60 seconds to render
+- **Code generation issues**: Ensure your prompt clearly describes the educational concept you want to teach
+- **LaTeX rendering**: LaTeX is fully supported - use MathTex() and Tex() freely for mathematical notation
 
 ## License
 

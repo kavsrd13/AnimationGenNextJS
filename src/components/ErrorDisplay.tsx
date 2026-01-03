@@ -17,10 +17,11 @@ export default function ErrorDisplay({ error }: ErrorDisplayProps) {
           <div className="mt-3 text-sm text-red-700">
             <p className="font-medium">Troubleshooting tips:</p>
             <ul className="list-disc list-inside mt-1 space-y-1">
-              <li>Try simplifying your prompt</li>
-              <li>Avoid requesting complex mathematical notation</li>
-              <li>Use basic shapes and animations</li>
-              <li>Check that your Azure OpenAI credentials are configured</li>
+              <li>Verify your Azure OpenAI API key and endpoint are configured correctly</li>
+              <li>Check that the Manim animation server is running and accessible</li>
+              <li>Ensure your prompt is clear and describes the educational concept</li>
+              <li>Try a simpler concept first, then add complexity</li>
+              <li>LaTeX is supported - use MathTex() for equations freely</li>
             </ul>
           </div>
         </div>

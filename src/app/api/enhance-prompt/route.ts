@@ -83,8 +83,20 @@ Return ONLY the enhanced prompt, nothing else.`
     return NextResponse.json({ enhancedPrompt })
   } catch (error: any) {
     console.error('Error in enhance-prompt API:', error)
+    
+    let errorMessage = 'Failed to enhance prompt'
+    let errorDetails = error.message
+    
+    if (error.message?.includes('fetch') || error.message?.includes('ENOTFOUND')) {
+      errorMessage = 'Cannot connect to Azure OpenAI'
+      errorDetails = 'Check your AZURE_OPENAI_ENDPOINT and network connection.'
+    } else if (error.message?.includes('401') || error.message?.includes('403')) {
+      errorMessage = 'Authentication failed'
+      errorDetails = 'Check your AZURE_OPENAI_API_KEY is valid.'
+    }
+    
     return NextResponse.json(
-      { error: 'Internal server error', details: error.message },
+      { error: errorMessage, details: errorDetails },
       { status: 500 }
     )
   }
