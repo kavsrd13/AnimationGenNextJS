@@ -56,8 +56,25 @@ FOR SHAPES AND VISUAL ELEMENTS:
 - Circle(), Square(), Rectangle(), Line(), Arrow(), Dot(), Polygon()
 - NumberPlane() for coordinate systems, Axes() for graphs
 - Set color: Circle(color=BLUE, radius=1)
-- Set position: .shift(UP), .move_to(ORIGIN), .next_to(other, RIGHT)
 - Use VGroup() to group related objects together
+
+CRITICAL - POSITIONING TO AVOID OVERLAPS:
+- ALWAYS position elements explicitly - never leave them at default ORIGIN
+- Use .to_edge(UP/DOWN/LEFT/RIGHT) to place elements at screen edges
+- Use .next_to(other_object, direction, buff=0.5) with buff for spacing
+- Use .shift(UP*2, RIGHT*3) for precise positioning
+- Use .arrange(DOWN, buff=0.5) for VGroups to auto-space elements
+- Use .move_to(position) to center elements at specific locations
+- Common positions: UP*3, DOWN*2, LEFT*4, RIGHT*4, ORIGIN
+- Add buffer spacing: buff=0.5 (small), buff=1.0 (medium), buff=1.5 (large)
+- Scale text if needed: .scale(0.8) to prevent edge overflow
+
+LAYOUT BEST PRACTICES:
+- Title at top: title.to_edge(UP, buff=0.5)
+- Main content in center: equation.move_to(ORIGIN) or equation.shift(UP)
+- Explanations below: explanation.next_to(equation, DOWN, buff=1)
+- Side annotations: label.next_to(shape, RIGHT, buff=0.7)
+- Multiple items: VGroup(item1, item2, item3).arrange(DOWN, buff=0.6)
 
 FOR EDUCATIONAL ANIMATIONS:
 - self.play(Write(equation)) - for equations appearing (great for teaching)
@@ -70,31 +87,35 @@ FOR EDUCATIONAL ANIMATIONS:
 - self.wait(1) - pause for student comprehension
 
 EDUCATIONAL BEST PRACTICES:
-- Start with the main concept or title
+- Start with the main concept or title positioned at the top
 - Build understanding step-by-step (don't show everything at once)
 - Use colors to distinguish different elements (RED for important, BLUE for formulas, GREEN for solutions)
 - Add pauses (self.wait()) after each key concept
 - Use arrows and annotations to guide student attention
 - Keep animations clear and at a pace students can follow
+- ALWAYS ensure proper spacing between elements to prevent overlaps
+- Test positioning: title at top, main content in center, details below
 - Total duration: 10-20 seconds for simple concepts, up to 30 seconds for complex topics
 
-GOOD EDUCATIONAL EXAMPLE:
+GOOD EDUCATIONAL EXAMPLE (NO OVERLAPS):
 from manim import *
 
 class GeneratedScene(Scene):
     def construct(self):
-        # Teaching Einstein's equation
+        # Teaching Einstein's equation with proper spacing
         title = Tex(r"Einstein's Energy-Mass Equivalence", font_size=40, color=YELLOW)
-        title.to_edge(UP)
+        title.to_edge(UP, buff=0.5)  # Position at top with buffer
         
         equation = MathTex(r"E = mc^2", font_size=60, color=BLUE)
+        equation.shift(UP*0.5)  # Slightly above center
         
+        # Group explanations with spacing
         explanation = VGroup(
             MathTex(r"E", r"=", r"\\text{Energy}", font_size=36, color=RED),
             MathTex(r"m", r"=", r"\\text{Mass}", font_size=36, color=GREEN),
             MathTex(r"c", r"=", r"\\text{Speed of Light}", font_size=36, color=ORANGE)
-        ).arrange(DOWN, buff=0.4)
-        explanation.next_to(equation, DOWN, buff=1)
+        ).arrange(DOWN, buff=0.5)  # Auto-space with buffer
+        explanation.next_to(equation, DOWN, buff=1.2)  # Position below equation with spacing
         
         self.play(Write(title))
         self.wait(0.5)
@@ -108,6 +129,7 @@ BEST PRACTICES FOR STUDENT LEARNING:
 - Break complex formulas into parts students can digest
 - Use colors to create visual connections
 - Include brief pauses for comprehension
+- Position all elements explicitly with proper spacing to avoid overlaps
 - Build from simple to complex gradually`
 
     const codeResponse = await fetch(
